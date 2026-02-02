@@ -5,7 +5,7 @@ import federation from '@originjs/vite-plugin-federation'
 import exposes from './federation-exposes.json'
 
 // Remote URL: set VITE_PROJECT_A_URL for production (e.g. Vercel). Default: local dev.
-const projectAUrl = (process.env.VITE_PROJECT_A_URL ?? '').replace(/\/$/, '') || 'http://localhost:3001/build'
+const projectAUrl = (process.env.VITE_PROJECT_A_URL ?? '').replace(/\/$/, '') || 'http://localhost:3001/build' // 'https://project-a-tau-gilt.vercel.app' //
 
 /** Ensures CORS headers so remotes (e.g. projectA on Vercel) can load host remoteEntry from localhost. */
 function corsForFederation() {
