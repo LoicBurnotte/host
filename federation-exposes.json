@@ -1,0 +1,5 @@
+{
+  "./Header": "./src/components/Header.tsx",
+  "./config": "./src/config.ts",
+  "./models/Link.model": "./src/models/Link.model.ts"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "host-remote-types",
+  "version": "0.0.0",
+  "description": "TypeScript declarations for host federation exposes (use in remote apps)",
+  "types": "host-remote.d.ts",
+  "files": [
+    "host-remote.d.ts",
+    "dist-types"
+  ],
+  "private": false
+}
