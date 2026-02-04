@@ -231,6 +231,38 @@ host/
 
 ---
 
+## How URL works:
+
+##### How the host configures projectA's URL:
+
+- You can use completely different URLs for projectA and the host. Module Federation only cares that each app knows the other’s full base URL where remoteEntry.js is served; the domain doesn’t have to match anything.
+  What matters:
+- Host loads projectA from whatever URL you set in host as VITE_PROJECT_A_URL (e.g. https://admin.stokr.info or https://any-other-domain.com).
+- ProjectA loads the host from whatever URL you set in projectA as VITE_HOST_URL (e.g. https://stokr.info or https://another-domain.com).
+
+##### So you can:
+
+- Serve projectA from e.g. https://admin.stokr.info, or https://my-app.vercel.app, or any other public URL.
+- Serve the host from e.g. https://stokr.info, or a different domain entirely.
+
+##### What you need to do:
+
+| App      | Env variable       | Set to…                                                                                                                                  |
+| -------- | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Host     | VITE_PROJECT_A_URL | The base URL where projectA’s build is served (no trailing slash). The host will load {VITE_PROJECT_A_URL}/assets/remoteEntry.js.        |
+| ProjectA | VITE_HOST_URL      | The base URL where the host’s build is served (e.g. https://stokr.info/build). ProjectA will load {VITE_HOST_URL}/assets/remoteEntry.js. |
+
+##### Constraints:
+
+Both URLs must be public and reachable from the browser.
+
+- CORS: both deployments must allow cross-origin requests (your vercel.json already uses Access-Control-Allow-Origin: \*, which is enough).
+- Path: If the host’s build is under /build, VITE_HOST_URL in projectA should end with /build (e.g. https://stokr.info/build). If you use a different path, adjust accordingly.
+
+So: yes, you can keep using admin.stokr.info and stokr.info, or switch to any other URLs, as long as you set VITE_PROJECT_A_URL and VITE_HOST_URL to those actual deployment URLs.
+
+---
+
 ## Quick reference
 
 | Task                              | Where                                                                               |
